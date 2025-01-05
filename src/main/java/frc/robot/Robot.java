@@ -7,25 +7,23 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-    private AprilTagVision aprilTagDetector;
+    private CameraVision cameraVision;
 
     @Override
     public void robotInit() {
         m_robotContainer = new RobotContainer();
-        aprilTagDetector = new AprilTagVision(0, 1); // Initialize with left and right camera indices
+        cameraVision = new CameraVision(0, 1); // Initialize with left and right camera indices
     }
 
     @Override
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
 
-        // Detect AprilTags and print their IDs and positions
-        aprilTagDetector.detectTags();
+        cameraVision.detectTagsAndBalls();
     }
 
     @Override
     public void disabledInit() {
-        // No need to release resources as WPILib handles it
     }
 
     @Override
